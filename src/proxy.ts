@@ -4,7 +4,8 @@ import type { NextRequest } from "next/server";
 import { ACCESS_COOKIE, hasValidAccess } from "./access";
 import { DEVICE_COOKIE, DEVICE_COOKIE_OPTIONS, resolveDeviceId } from "./generation/device";
 
-const PUBLIC_PATHS = ["/acces", "/api/acces"];
+// /api/mcp checks its own secret token (Claude connectors cannot use the login cookie).
+const PUBLIC_PATHS = ["/acces", "/api/acces", "/api/mcp"];
 
 function isPublic(pathname: string): boolean {
   return PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`));
