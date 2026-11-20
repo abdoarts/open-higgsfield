@@ -6,7 +6,8 @@
     "dev": "next dev --port 3000",
     "build": "next build",
     "start": "next start",
-    "brand": "node scripts/build-brand-assets.mjs"
+    "brand": "node scripts/build-brand-assets.mjs",
+    "catalog": "node scripts/build-hf-catalog.mjs src/mcp/hf-catalog.json"
   },
   "dependencies": {
     "@tanstack/react-virtual": "^3.14.10",
