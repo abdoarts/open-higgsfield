@@ -45,7 +45,7 @@ const TOOLS = [
     name: "generate",
     title: "Générer une image ou une vidéo",
     description:
-      "Generate an image or a video with a Higgsfield model, billed to the studio owner's Higgsfield Cloud API credits. Waits up to `wait_seconds` (default 50) for the result; if it is not finished yet, returns a request_id to pass to `get_status`. Images usually finish within the wait; videos usually need get_status. Settings use the keys from list_models (e.g. aspectRatio, resolution, duration, batchSize as a string). Media inputs must be public https URLs.",
+      "Generate an image or a video with a Higgsfield model, billed to the studio owner's Higgsfield Cloud API credits. Waits up to `wait_seconds` (default 50) for the result; if it is not finished yet, returns a request_id to pass to `get_status`. Images usually finish within the wait; videos usually need get_status. Settings use the keys from list_models (e.g. aspectRatio, resolution, duration, batchSize as a string). Media inputs must be public https URLs. LIP SYNC / TALKING CHARACTER: use model 'seedance-2.5' (or 'seedance-2'), pass the face as reference_image_urls (or start_image_url) and the speech as audio_urls; say in the prompt that the person in the image speaks the provided audio, and set settings.duration to cover the audio length. Only Seedance models accept audio.",
     inputSchema: {
       type: "object",
       properties: {
@@ -60,7 +60,7 @@ const TOOLS = [
         end_image_url: { type: "string", description: "Last frame image URL." },
         reference_image_urls: { type: "array", items: { type: "string" }, description: "Reference image URLs." },
         video_urls: { type: "array", items: { type: "string" }, description: "Source video URLs (edit, extend, motion control)." },
-        audio_urls: { type: "array", items: { type: "string" }, description: "Audio URLs." },
+        audio_urls: { type: "array", items: { type: "string" }, description: "Audio URLs (speech for lip sync, music, sound). Seedance models only." },
         wait_seconds: { type: "number", minimum: 0, maximum: MAX_WAIT_SECONDS, description: "How long to wait for the result before returning a request_id. Default 50." },
       },
       required: ["prompt"],

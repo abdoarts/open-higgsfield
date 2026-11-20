@@ -160,6 +160,20 @@ function mapSeedance(plane: GenerationPlane, prefix: string): Mapped {
   const videos = urls(plane, "video");
   const audios = urls(plane, "audio");
   const shared = seedanceBody(plane, true);
+  // image-to-video ignores audio: when a soundtrack is supplied (lip sync / dialogue),
+  // send the start frame as a reference so the audio actually drives the video.
+  if (start && audios.length) {
+    return {
+      path: `${prefix}/reference-to-video`,
+      body: {
+        ...shared,
+        aspect_ratio: plane.settings.aspectRatio,
+        image_urls: [start, ...refs],
+        ...(videos.length ? { video_urls: videos } : {}),
+        audio_urls: audios,
+      },
+    };
+  }
   if (start) {
     return {
       path: `${prefix}/image-to-video`,
